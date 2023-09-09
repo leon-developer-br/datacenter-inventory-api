@@ -1,0 +1,5 @@
+export NVM_DIR=$HOME/.nvm;
+source $NVM_DIR/nvm.sh;
+cd ..
+yarn build;
+docker build -t dipar-inventory .;
