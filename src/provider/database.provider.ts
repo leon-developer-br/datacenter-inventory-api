@@ -7,11 +7,11 @@ export const entities = [Cluster, Host, VirtualMachine];
 
 export const databaseConfig: TypeOrmModuleOptions = {
   type: 'postgres',
-  host: '127.0.0.1',
-  port: 5432,
-  username: 'postgres',
-  password: 'postgres',
-  database: 'dipar-inventory',
+  host: process.env.DATABASE_HOST,
+  port: Number(process.env.DATABASE_PORT),
+  username: process.env.DATABASE_USERNAME,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME,
   entities,
   synchronize: true,
 };
