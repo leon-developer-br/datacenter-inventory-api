@@ -1,0 +1,12 @@
+docker rm -f datacenter-inventory;
+
+docker run -d --name datacenter-inventory \
+    -e APP_PORT=8080 \
+    -e DATABASE_HOST=postgres \
+    -e DATABASE_PORT=5432 \
+    -e DATABASE_NAME=datacenter-inventory \
+    -e DATABASE_USERNAME=postgres \
+    -e DATABASE_PASSWORD=postgres \
+    -p 8080:8080 \
+    --network ubuntu \
+    leonpereiratech/datacenter-inventory

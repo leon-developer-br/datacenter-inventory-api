@@ -1,0 +1,2 @@
+docker tag datacenter-inventory leonpereiratech/datacenter-inventory
+docker push leonpereiratech/datacenter-inventory
