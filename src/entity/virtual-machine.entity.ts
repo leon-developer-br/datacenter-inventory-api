@@ -19,7 +19,7 @@ export class VirtualMachine {
   @Column({ unique: true })
   vmwareId: string;
 
-  @Column()
+  @Column({ nullable: true })
   os: string;
 
   @Column()
