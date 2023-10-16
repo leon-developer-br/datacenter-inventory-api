@@ -41,6 +41,11 @@ export class ClusterController {
     return this.service.update(Number(id), dto);
   }
 
+  @Post(':vmwareId/sync')
+  sync(@Param('vmwareId') vmwareId: string, @Body() dto: ClusterDTO) {
+    return this.service.sync(vmwareId, dto);
+  }
+
   @Delete(':id')
   @HttpCode(204)
   delete(@Param('id') id: string) {

@@ -9,6 +9,7 @@ export type QueryHost = {
 
 export type HostDTO = {
   name: string;
+  vmwareId: string;
   vendor: string;
   clusterId: number;
   cpu: number;
@@ -22,8 +23,8 @@ export type VirtualMachineDTO = {
   os: string;
   cpu: number;
   memory: number;
-}
+};
 
 export type QueryVirtualMachine = {
   hostId?: number;
-}
+};

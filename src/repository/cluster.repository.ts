@@ -3,6 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Cluster } from 'src/entity/cluster.entity';
 import { Repository } from 'typeorm';
 
+type Query = {
+  vmwareId: string;
+};
+
 @Injectable()
 export class ClusterRepository {
   constructor(
@@ -10,8 +14,20 @@ export class ClusterRepository {
     private repository: Repository<Cluster>,
   ) {}
 
-  list() {
-    return this.repository.find();
+  list(query?: Query) {
+    return this.repository.find({
+      where: {
+        vmwareId: query?.vmwareId,
+      },
+    });
+  }
+
+  findOneByVmwareId(vmwareId: string) {
+    return this.repository.findOne({
+      where: {
+        vmwareId,
+      },
+    });
   }
 
   async get(id: number) {

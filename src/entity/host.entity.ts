@@ -18,16 +18,19 @@ export class Host {
   @Column({ unique: true })
   name: string;
 
-  @Column()
+  @Column({ unique: true })
+  vmwareId: string;
+
+  @Column({ nullable: true })
   vendor: string;
 
-  @Column()
+  @Column({ nullable: true })
   cpu: number;
 
-  @Column()
+  @Column({ nullable: true })
   memory: number;
 
-  @ManyToOne(() => Cluster, (cluster) => cluster.hosts, { nullable: false })
+  @ManyToOne(() => Cluster, (cluster) => cluster.hosts, { nullable: true })
   cluster: Cluster;
 
   @OneToMany(() => VirtualMachine, (vm) => vm.host)

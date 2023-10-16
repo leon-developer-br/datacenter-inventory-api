@@ -10,7 +10,7 @@ export class HostService {
   constructor(
     private repository: HostRepository,
     private clusterRepository: ClusterRepository,
-    private virtualMachineRepository: VirtualMachineRepository
+    private virtualMachineRepository: VirtualMachineRepository,
   ) {}
 
   list() {
@@ -22,28 +22,38 @@ export class HostService {
   }
 
   async listVirtualMachines(id: number) {
-    const host = await this.get(id)
+    const host = await this.get(id);
     return this.virtualMachineRepository.list({ hostId: host.id });
   }
 
   async create(dto: HostDTO) {
-    const host = this.mapDto(new Host(), dto);
-    host.cluster = await this.clusterRepository.get(dto.clusterId);
+    const host = await this.mapDto(new Host(), dto);
     return this.repository.save(host);
   }
 
   async update(id: number, dto: HostDTO) {
     let host = await this.get(id);
-    host = this.mapDto(host, dto);
-    host.cluster = await this.clusterRepository.get(dto.clusterId);
+    host = await this.mapDto(host, dto);
     return this.repository.save(host);
   }
 
-  mapDto(host: Host, dto: HostDTO) {
+  async sync(vmwareId: string, dto: HostDTO) {
+    const exists = await this.repository.findOneByVmwareId(vmwareId);
+    if (!exists) {
+      return this.create(dto);
+    }
+    return this.update(exists.id, dto);
+  }
+
+  async mapDto(host: Host, dto: HostDTO) {
+    host.vmwareId = dto.vmwareId;
     host.name = dto.name;
     host.vendor = dto.vendor;
     host.cpu = dto.cpu;
     host.memory = dto.memory;
+    if (dto.clusterId) {
+      host.cluster = await this.clusterRepository.get(dto.clusterId);
+    }
     return host;
   }
 

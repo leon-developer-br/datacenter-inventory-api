@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Cluster } from 'src/entity/cluster.entity';
 import { ClusterRepository } from 'src/repository/cluster.repository';
 import { HostRepository } from 'src/repository/host.repository';
@@ -20,11 +20,18 @@ export class ClusterService {
   }
 
   async listHosts(id: number) {
-    const cluster = await this.get(id)
+    const cluster = await this.get(id);
     return this.hostRepository.list({ clusterId: cluster.id });
   }
 
-  create(dto: ClusterDTO) {
+  async create(dto: ClusterDTO) {
+    const exists = await this.repository.findOneByVmwareId(dto.vmwareId);
+    if (exists) {
+      throw new HttpException(
+        'VmwareID already in use',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     const cluster = this.mapDto(new Cluster(), dto);
     return this.repository.save(cluster);
   }
@@ -33,6 +40,14 @@ export class ClusterService {
     let cluster = await this.get(id);
     cluster = this.mapDto(cluster, dto);
     return this.repository.save(cluster);
+  }
+
+  async sync(vmwareId: string, dto: ClusterDTO) {
+    const exists = await this.repository.findOneByVmwareId(vmwareId);
+    if (!exists) {
+      return this.create(dto);
+    }
+    return this.update(exists.id, dto);
   }
 
   mapDto(cluster: Cluster, dto: ClusterDTO) {

@@ -22,6 +22,14 @@ export class HostRepository {
     return this.repository.find(options);
   }
 
+  findOneByVmwareId(vmwareId: string) {
+    return this.repository.findOne({
+      where: {
+        vmwareId,
+      },
+    });
+  }
+
   async get(id: number) {
     const host = await this.repository.findOneBy({ id });
     if (!host) {

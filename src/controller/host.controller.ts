@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { HostService } from 'src/service/host.service';
 import { HostDTO } from 'src/types';
 
@@ -30,6 +39,11 @@ export class HostController {
   @Put(':id')
   update(@Param('id') id: string, @Body() dto: HostDTO) {
     return this.service.update(Number(id), dto);
+  }
+
+  @Post(':vmwareId/sync')
+  sync(@Param('vmwareId') vmwareId: string, @Body() dto: HostDTO) {
+    return this.service.sync(vmwareId, dto);
   }
 
   @Delete(':id')
