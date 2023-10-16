@@ -6,7 +6,10 @@ import { VirtualMachineDTO } from 'src/types';
 
 @Injectable()
 export class VirtualMachineService {
-  constructor(private repository: VirtualMachineRepository, private hostRepository: HostRepository) {}
+  constructor(
+    private repository: VirtualMachineRepository,
+    private hostRepository: HostRepository,
+  ) {}
 
   list() {
     return this.repository.list();
@@ -27,6 +30,14 @@ export class VirtualMachineService {
     vm = this.mapDto(vm, dto);
     vm.host = await this.hostRepository.get(dto.hostId);
     return this.repository.save(vm);
+  }
+
+  async sync(vmwareId: string, dto: VirtualMachineDTO) {
+    const exists = await this.repository.findOneByVmwareId(vmwareId);
+    if (!exists) {
+      return this.create(dto);
+    }
+    return this.update(exists.id, dto);
   }
 
   mapDto(vm: VirtualMachine, dto: VirtualMachineDTO) {

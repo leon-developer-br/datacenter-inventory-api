@@ -22,10 +22,21 @@ export class VirtualMachineRepository {
     return this.repository.find(options);
   }
 
+  findOneByVmwareId(vmwareId: string) {
+    return this.repository.findOne({
+      where: {
+        vmwareId,
+      },
+    });
+  }
+
   async get(id: number) {
     const vm = await this.repository.findOneBy({ id });
     if (!vm) {
-      throw new HttpException('Máquina virtual não encontrada', HttpStatus.NOT_FOUND);
+      throw new HttpException(
+        'Máquina virtual não encontrada',
+        HttpStatus.NOT_FOUND,
+      );
     }
     return vm;
   }

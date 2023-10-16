@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { VirtualMachineService } from 'src/service/virtual-machine.service';
 import { VirtualMachineDTO } from 'src/types';
 
@@ -25,6 +34,11 @@ export class VirtualMachineController {
   @Put(':id')
   update(@Param('id') id: string, @Body() dto: VirtualMachineDTO) {
     return this.service.update(Number(id), dto);
+  }
+
+  @Post(':vmwareId/sync')
+  sync(@Param('vmwareId') vmwareId: string, @Body() dto: VirtualMachineDTO) {
+    return this.service.sync(vmwareId, dto);
   }
 
   @Delete(':id')
