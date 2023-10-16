@@ -18,6 +18,9 @@ export class HostRepository {
           id: query?.clusterId,
         },
       },
+      order: {
+        name: 'ASC',
+      },
     };
     return this.repository.find(options);
   }

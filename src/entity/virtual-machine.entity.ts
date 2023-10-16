@@ -13,7 +13,7 @@ export class VirtualMachine {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
+  @Column()
   name: string;
 
   @Column({ unique: true })
@@ -28,7 +28,7 @@ export class VirtualMachine {
   @Column()
   memory: number;
 
-  @ManyToOne(() => Host, (host) => host.vms, { nullable: false })
+  @ManyToOne(() => Host, (host) => host.vms, { nullable: true })
   host: Host;
 
   @CreateDateColumn({ type: 'timestamp with time zone' })

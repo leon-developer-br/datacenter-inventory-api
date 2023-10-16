@@ -18,6 +18,9 @@ export class VirtualMachineRepository {
           id: query?.hostId,
         },
       },
+      order: {
+        name: 'ASC',
+      },
     };
     return this.repository.find(options);
   }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { VirtualMachine } from 'src/entity/virtual-machine.entity';
 import { HostRepository } from 'src/repository/host.repository';
 import { VirtualMachineRepository } from 'src/repository/virtual-machine.repository';
@@ -20,15 +20,18 @@ export class VirtualMachineService {
   }
 
   async create(dto: VirtualMachineDTO) {
-    const vm = this.mapDto(new VirtualMachine(), dto);
-    vm.host = await this.hostRepository.get(dto.hostId);
+    const err = HttpStatus.BAD_REQUEST;
+    const exists = await this.repository.findOneByVmwareId(dto.vmwareId);
+    if (exists) {
+      throw new HttpException(`VmwareID already in use: ${dto.vmwareId}`, err);
+    }
+    const vm = await this.mapDto(new VirtualMachine(), dto);
     return this.repository.save(vm);
   }
 
   async update(id: number, dto: VirtualMachineDTO) {
     let vm = await this.get(id);
-    vm = this.mapDto(vm, dto);
-    vm.host = await this.hostRepository.get(dto.hostId);
+    vm = await this.mapDto(vm, dto);
     return this.repository.save(vm);
   }
 
@@ -40,12 +43,17 @@ export class VirtualMachineService {
     return this.update(exists.id, dto);
   }
 
-  mapDto(vm: VirtualMachine, dto: VirtualMachineDTO) {
+  async mapDto(vm: VirtualMachine, dto: VirtualMachineDTO) {
     vm.name = dto.name;
     vm.vmwareId = dto.vmwareId;
-    vm.os = dto.os;
+    if (dto.os) {
+      vm.os = dto.os;
+    }
     vm.cpu = dto.cpu;
     vm.memory = dto.memory;
+    if (dto.hostId) {
+      vm.host = await this.hostRepository.get(dto.hostId);
+    }
     return vm;
   }
 

@@ -19,6 +19,9 @@ export class ClusterRepository {
       where: {
         vmwareId: query?.vmwareId,
       },
+      order: {
+        name: 'ASC',
+      },
     });
   }
 
