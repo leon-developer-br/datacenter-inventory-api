@@ -1,6 +1,6 @@
 {
   "name": "dipar-inventory",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Datacenter inventory REST API",
   "author": "leonpereiratech@gmail.com",
   "private": true,

@@ -7,10 +7,13 @@ import {
   Param,
   Post,
   Put,
+  UseInterceptors,
 } from '@nestjs/common';
+import { AuthInterceptor } from 'src/interceptor/auth.interceptor';
 import { ClusterService } from 'src/service/cluster.service';
 import { ClusterDTO } from 'src/types';
 
+@UseInterceptors(AuthInterceptor)
 @Controller('clusters')
 export class ClusterController {
   constructor(private readonly service: ClusterService) {}

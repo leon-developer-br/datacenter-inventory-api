@@ -7,6 +7,7 @@ docker run -d --name datacenter-inventory \
     -e DATABASE_NAME=datacenter-inventory \
     -e DATABASE_USERNAME=postgres \
     -e DATABASE_PASSWORD=postgres \
+    -e AUTH_TOKENS=token1,token2,token3 \
     -p 8080:8080 \
     --network ubuntu \
     leonpereiratech/datacenter-inventory

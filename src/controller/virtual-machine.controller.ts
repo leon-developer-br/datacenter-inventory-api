@@ -7,10 +7,13 @@ import {
   Param,
   Post,
   Put,
+  UseInterceptors,
 } from '@nestjs/common';
+import { AuthInterceptor } from 'src/interceptor/auth.interceptor';
 import { VirtualMachineService } from 'src/service/virtual-machine.service';
 import { VirtualMachineDTO } from 'src/types';
 
+@UseInterceptors(AuthInterceptor)
 @Controller('virtual-machines')
 export class VirtualMachineController {
   constructor(private readonly service: VirtualMachineService) {}

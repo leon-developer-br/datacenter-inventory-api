@@ -7,10 +7,13 @@ import {
   Param,
   Post,
   Put,
+  UseInterceptors,
 } from '@nestjs/common';
+import { AuthInterceptor } from 'src/interceptor/auth.interceptor';
 import { HostService } from 'src/service/host.service';
 import { HostDTO } from 'src/types';
 
+@UseInterceptors(AuthInterceptor)
 @Controller('hosts')
 export class HostController {
   constructor(private readonly service: HostService) {}
