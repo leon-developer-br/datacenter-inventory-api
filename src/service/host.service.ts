@@ -17,11 +17,11 @@ export class HostService {
     return this.repository.list();
   }
 
-  get(id: number) {
+  get(id: string) {
     return this.repository.get(id);
   }
 
-  async listVirtualMachines(id: number) {
+  async listVirtualMachines(id: string) {
     const host = await this.get(id);
     return this.virtualMachineRepository.list({ hostId: host.id });
   }
@@ -31,14 +31,14 @@ export class HostService {
     return this.repository.save(host);
   }
 
-  async update(id: number, dto: HostDTO) {
+  async update(id: string, dto: HostDTO) {
     let host = await this.get(id);
     host = await this.mapDto(host, dto);
     return this.repository.save(host);
   }
 
-  async sync(vmwareId: string, dto: HostDTO) {
-    const exists = await this.repository.findOneByVmwareId(vmwareId);
+  async sync(id: string, dto: HostDTO) {
+    const exists = await this.get(id);
     if (!exists) {
       return this.create(dto);
     }
@@ -46,7 +46,7 @@ export class HostService {
   }
 
   async mapDto(host: Host, dto: HostDTO) {
-    host.vmwareId = dto.vmwareId;
+    host.id = dto.id;
     host.name = dto.name;
     host.vendor = dto.vendor;
     host.cpu = dto.cpu;
@@ -57,7 +57,7 @@ export class HostService {
     return host;
   }
 
-  delete(id: number) {
+  delete(id: string) {
     return this.repository.delete(id);
   }
 }

@@ -1,30 +1,30 @@
 export type ClusterDTO = {
+  id: string;
   name: string;
-  vmwareId: string;
 };
 
 export type QueryHost = {
-  clusterId?: number;
+  clusterId?: string;
 };
 
 export type HostDTO = {
+  id: string;
   name: string;
-  vmwareId: string;
   vendor: string;
-  clusterId: number;
+  clusterId: string;
   cpu: number;
   memory: number;
 };
 
 export type VirtualMachineDTO = {
+  id: string;
   name: string;
-  vmwareId: string;
-  hostId: number;
+  hostId: string;
   os: string;
   cpu: number;
   memory: number;
 };
 
 export type QueryVirtualMachine = {
-  hostId?: number;
+  hostId?: string;
 };

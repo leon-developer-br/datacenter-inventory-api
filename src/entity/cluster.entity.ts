@@ -3,21 +3,18 @@ import {
   CreateDateColumn,
   Entity,
   OneToMany,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Host } from './host.entity';
 
 @Entity()
 export class Cluster {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryColumn({ unique: true })
+  id: string;
 
   @Column({ unique: true })
   name: string;
-
-  @Column({ unique: true })
-  vmwareId: string;
 
   @OneToMany(() => Host, (host) => host.cluster)
   hosts: Host[];

@@ -1,11 +1,7 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Cluster } from 'src/entity/cluster.entity';
 import { Repository } from 'typeorm';
-
-type Query = {
-  vmwareId: string;
-};
 
 @Injectable()
 export class ClusterRepository {
@@ -14,38 +10,23 @@ export class ClusterRepository {
     private repository: Repository<Cluster>,
   ) {}
 
-  list(query?: Query) {
+  list() {
     return this.repository.find({
-      where: {
-        vmwareId: query?.vmwareId,
-      },
       order: {
         name: 'ASC',
       },
     });
   }
 
-  findOneByVmwareId(vmwareId: string) {
-    return this.repository.findOne({
-      where: {
-        vmwareId,
-      },
-    });
-  }
-
-  async get(id: number) {
-    const cluster = await this.repository.findOneBy({ id });
-    if (!cluster) {
-      throw new HttpException('Cluster não encontrado', HttpStatus.NOT_FOUND);
-    }
-    return cluster;
+  get(id: string) {
+    return this.repository.findOneBy({ id });
   }
 
   save(cluster: Cluster) {
     return this.repository.save(cluster);
   }
 
-  async delete(id: number) {
+  delete(id: string) {
     return this.repository.delete(id);
   }
 }

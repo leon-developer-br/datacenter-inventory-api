@@ -4,7 +4,7 @@ import {
   Entity,
   ManyToOne,
   OneToMany,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Cluster } from './cluster.entity';
@@ -12,14 +12,11 @@ import { VirtualMachine } from './virtual-machine.entity';
 
 @Entity()
 export class Host {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryColumn({ unique: true })
+  id: string;
 
   @Column({ unique: true })
   name: string;
-
-  @Column({ unique: true })
-  vmwareId: string;
 
   @Column({ nullable: true })
   vendor: string;

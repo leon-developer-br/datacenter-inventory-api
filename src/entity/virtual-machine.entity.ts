@@ -3,21 +3,18 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Host } from './host.entity';
 
 @Entity()
 export class VirtualMachine {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryColumn({ unique: true })
+  id: string;
 
   @Column()
   name: string;
-
-  @Column({ unique: true })
-  vmwareId: string;
 
   @Column({ nullable: true })
   os: string;

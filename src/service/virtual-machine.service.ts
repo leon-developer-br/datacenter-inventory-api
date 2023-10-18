@@ -15,28 +15,28 @@ export class VirtualMachineService {
     return this.repository.list();
   }
 
-  get(id: number) {
+  get(id: string) {
     return this.repository.get(id);
   }
 
   async create(dto: VirtualMachineDTO) {
     const err = HttpStatus.BAD_REQUEST;
-    const exists = await this.repository.findOneByVmwareId(dto.vmwareId);
+    const exists = await this.get(dto.id);
     if (exists) {
-      throw new HttpException(`VmwareID already in use: ${dto.vmwareId}`, err);
+      throw new HttpException(`ID already in use: ${dto.id}`, err);
     }
     const vm = await this.mapDto(new VirtualMachine(), dto);
     return this.repository.save(vm);
   }
 
-  async update(id: number, dto: VirtualMachineDTO) {
+  async update(id: string, dto: VirtualMachineDTO) {
     let vm = await this.get(id);
     vm = await this.mapDto(vm, dto);
     return this.repository.save(vm);
   }
 
-  async sync(vmwareId: string, dto: VirtualMachineDTO) {
-    const exists = await this.repository.findOneByVmwareId(vmwareId);
+  async sync(id: string, dto: VirtualMachineDTO) {
+    const exists = await this.get(id);
     if (!exists) {
       return this.create(dto);
     }
@@ -44,8 +44,8 @@ export class VirtualMachineService {
   }
 
   async mapDto(vm: VirtualMachine, dto: VirtualMachineDTO) {
+    vm.id = dto.id;
     vm.name = dto.name;
-    vm.vmwareId = dto.vmwareId;
     if (dto.os) {
       vm.os = dto.os;
     }
@@ -57,7 +57,7 @@ export class VirtualMachineService {
     return vm;
   }
 
-  delete(id: number) {
+  delete(id: string) {
     return this.repository.delete(id);
   }
 }

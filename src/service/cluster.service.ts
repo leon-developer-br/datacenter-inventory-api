@@ -15,35 +15,32 @@ export class ClusterService {
     return this.repository.list();
   }
 
-  get(id: number) {
+  get(id: string) {
     return this.repository.get(id);
   }
 
-  async listHosts(id: number) {
+  async listHosts(id: string) {
     const cluster = await this.get(id);
     return this.hostRepository.list({ clusterId: cluster.id });
   }
 
   async create(dto: ClusterDTO) {
-    const exists = await this.repository.findOneByVmwareId(dto.vmwareId);
+    const exists = await this.repository.get(dto.id);
     if (exists) {
-      throw new HttpException(
-        'VmwareID already in use',
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new HttpException('Id já em uso', HttpStatus.BAD_REQUEST);
     }
     const cluster = this.mapDto(new Cluster(), dto);
     return this.repository.save(cluster);
   }
 
-  async update(id: number, dto: ClusterDTO) {
+  async update(id: string, dto: ClusterDTO) {
     let cluster = await this.get(id);
     cluster = this.mapDto(cluster, dto);
     return this.repository.save(cluster);
   }
 
-  async sync(vmwareId: string, dto: ClusterDTO) {
-    const exists = await this.repository.findOneByVmwareId(vmwareId);
+  async sync(id: string, dto: ClusterDTO) {
+    const exists = await this.get(id);
     if (!exists) {
       return this.create(dto);
     }
@@ -51,12 +48,12 @@ export class ClusterService {
   }
 
   mapDto(cluster: Cluster, dto: ClusterDTO) {
+    cluster.id = dto.id;
     cluster.name = dto.name;
-    cluster.vmwareId = dto.vmwareId;
     return cluster;
   }
 
-  delete(id: number) {
+  delete(id: string) {
     return this.repository.delete(id);
   }
 }

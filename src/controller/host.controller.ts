@@ -25,12 +25,12 @@ export class HostController {
 
   @Get(':id')
   show(@Param('id') id: string) {
-    return this.service.get(Number(id));
+    return this.service.get(id);
   }
 
   @Get(':id/virtual-machines')
   listHosts(@Param('id') id: string) {
-    return this.service.listVirtualMachines(Number(id));
+    return this.service.listVirtualMachines(id);
   }
 
   @Post()
@@ -41,17 +41,17 @@ export class HostController {
 
   @Put(':id')
   update(@Param('id') id: string, @Body() dto: HostDTO) {
-    return this.service.update(Number(id), dto);
+    return this.service.update(id, dto);
   }
 
-  @Post(':vmwareId/sync')
-  sync(@Param('vmwareId') vmwareId: string, @Body() dto: HostDTO) {
-    return this.service.sync(vmwareId, dto);
+  @Post(':id/sync')
+  sync(@Param('id') id: string, @Body() dto: HostDTO) {
+    return this.service.sync(id, dto);
   }
 
   @Delete(':id')
   @HttpCode(204)
   delete(@Param('id') id: string) {
-    return this.service.delete(Number(id));
+    return this.service.delete(id);
   }
 }

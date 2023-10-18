@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Host } from 'src/entity/host.entity';
 import { QueryHost } from 'src/types';
@@ -25,27 +25,15 @@ export class HostRepository {
     return this.repository.find(options);
   }
 
-  findOneByVmwareId(vmwareId: string) {
-    return this.repository.findOne({
-      where: {
-        vmwareId,
-      },
-    });
+  get(id: string) {
+    return this.repository.findOneBy({ id });
   }
 
-  async get(id: number) {
-    const host = await this.repository.findOneBy({ id });
-    if (!host) {
-      throw new HttpException('Host não encontrado', HttpStatus.NOT_FOUND);
-    }
-    return host;
+  save(host: Host) {
+    return this.repository.save(host);
   }
 
-  save(cluster: Host) {
-    return this.repository.save(cluster);
-  }
-
-  async delete(id: number) {
+  delete(id: string) {
     return this.repository.delete(id);
   }
 }
