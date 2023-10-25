@@ -18,6 +18,9 @@ export class Host {
   @Column({ unique: true })
   name: string;
 
+  @Column({ unique: true })
+  ip: string;
+
   @Column({ nullable: true })
   vendor: string;
 

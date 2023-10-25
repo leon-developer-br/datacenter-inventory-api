@@ -16,6 +16,9 @@ export class VirtualMachine {
   @Column()
   name: string;
 
+  @Column({ unique: true })
+  ip: string;
+
   @Column({ nullable: true })
   os: string;
 
