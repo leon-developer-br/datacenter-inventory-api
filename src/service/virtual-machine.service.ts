@@ -49,6 +49,9 @@ export class VirtualMachineService {
     if (dto.os) {
       vm.os = dto.os;
     }
+    if (dto.ip) {
+      vm.ip = dto.ip;
+    }
     vm.cpu = dto.cpu;
     vm.memory = dto.memory;
     if (dto.hostId) {

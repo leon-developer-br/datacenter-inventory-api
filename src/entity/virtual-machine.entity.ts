@@ -16,7 +16,7 @@ export class VirtualMachine {
   @Column()
   name: string;
 
-  @Column({ unique: true, nullable: true })
+  @Column({ unique: false, nullable: true })
   ip: string;
 
   @Column({ nullable: true })

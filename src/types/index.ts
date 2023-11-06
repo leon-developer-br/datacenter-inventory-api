@@ -21,6 +21,7 @@ export type VirtualMachineDTO = {
   name: string;
   hostId: string;
   os: string;
+  ip: string;
   cpu: number;
   memory: number;
 };
