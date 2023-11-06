@@ -1,0 +1,51 @@
+[
+    {
+      "cluster": "Cluster-hml",
+      "hosts": ["hvmc0725.trtrio.gov.br", "hvmc0712.trtrio.gov.br"]
+    },
+    {
+      "cluster": "Lavradio",
+      "hosts": ["10.1.30.150", "10.1.30.151", "10.1.30.154", "10.1.30.157", "10.1.30.158", "10.1.30.159"]
+    },
+    {
+      "cluster": "Oracle-LV",
+      "hosts": ["10.1.30.155", "10.1.30.156"]
+    },
+    {
+      "cluster": "Cluster-Oracle-NO-Features",
+      "hosts": ["hvma0708.trtrio.gov.br", "hvma0709.trtrio.gov.br", "hvme0305.trtrio.gov.br"]
+    },
+    {
+      "cluster": "Cluster-Oracle-Features",
+      "hosts": ["hvma0710.trtrio.gov.br", "hvme0303.trtrio.gov.br", "hvme0304.trtrio.gov.br"]
+    },
+    {
+      "cluster": "Cluster-PJe-DB-Prod",
+      "hosts": ["hvma0712.trtrio.gov.br", "hvma0714.trtrio.gov.br", "hvmc0728.trtrio.gov.br", "hvme0307.trtrio.gov.br", "hvme0309.trtrio.gov.br"]
+    },
+    {
+      "cluster": "Cluster-Prod",
+      "hosts": ["hvma0717.trtrio.gov.br", "hvmc0734.trtrio.gov.br", "hvmc0736.trtrio.gov.br", "hvme0314.trtrio.gov.br", "hvme0315.trtrio.gov.br"]
+    },
+    {
+      "cluster": "Cluster-Oracle-App",
+      "hosts": ["hvmb0709.trtrio.gov.br", "hvmb0719.trtrio.gov.br"]
+    },
+    {
+      "cluster": "Cluster-PJe-DB-Ambientes",
+      "hosts": ["hvmb0711.trtrio.gov.br", "hvmb0713.trtrio.gov.br", "hvmb0721.trtrio.gov.br"]
+    },
+    {
+      "cluster": "WIFI-Aruba",
+      "hosts": ["hvmb0725.trtrio.gov.br"]
+    },
+    {
+      "cluster": "Cluster-PJe-App",
+      "hosts": ["hvmc0703.trtrio.gov.br", "hvmc0706.trtrio.gov.br", "hvmc0709.trtrio.gov.br", "hvmc0715.trtrio.gov.br", "hvmc0718.trtrio.gov.br", "hvmc0721.trtrio.gov.br"]
+    },
+    {
+      "cluster": "xFusion",
+      "hosts": ["hvmd0720.trtrio.gov.br","hvmd0722.trtrio.gov.br","hvmd0724.trtrio.gov.br","hvmd0726.trtrio.gov.br","hvmd0728.trtrio.gov.br","hvmd0732.trtrio.gov.br"]
+    }
+  ]
+  

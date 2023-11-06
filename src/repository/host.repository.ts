@@ -29,6 +29,10 @@ export class HostRepository {
     return this.repository.findOneBy({ id });
   }
 
+  findByName(name: string) {
+    return this.repository.findOneBy({ name });
+  }
+
   save(host: Host) {
     return this.repository.save(host);
   }

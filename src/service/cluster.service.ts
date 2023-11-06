@@ -19,6 +19,10 @@ export class ClusterService {
     return this.repository.get(id);
   }
 
+  findByName(name: string) {
+    return this.repository.findByName(name);
+  }
+
   async listHosts(id: string) {
     const cluster = await this.get(id);
     return this.hostRepository.list({ clusterId: cluster.id });

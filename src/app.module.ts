@@ -11,6 +11,7 @@ import { VirtualMachineService } from './service/virtual-machine.service';
 import { ClusterRepository } from './repository/cluster.repository';
 import { HostRepository } from './repository/host.repository';
 import { VirtualMachineRepository } from './repository/virtual-machine.repository';
+import { BootstrapService } from './service/bootstrap.service';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { VirtualMachineRepository } from './repository/virtual-machine.repositor
     ClusterRepository,
     HostRepository,
     VirtualMachineRepository,
+    BootstrapService,
     ClusterService,
     HostService,
     VirtualMachineService,

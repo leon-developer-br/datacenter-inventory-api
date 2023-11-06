@@ -18,7 +18,7 @@ export class Host {
   @Column({ unique: true })
   name: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: true })
   ip: string;
 
   @Column({ nullable: true })

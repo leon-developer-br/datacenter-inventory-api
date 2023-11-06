@@ -22,6 +22,10 @@ export class ClusterRepository {
     return this.repository.findOneBy({ id });
   }
 
+  findByName(name: string) {
+    return this.repository.findOneBy({ name });
+  }
+
   save(cluster: Cluster) {
     return this.repository.save(cluster);
   }

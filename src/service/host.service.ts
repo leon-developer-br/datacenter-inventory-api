@@ -21,9 +21,17 @@ export class HostService {
     return this.repository.get(id);
   }
 
+  findByName(name: string) {
+    return this.repository.findByName(name);
+  }
+
   async listVirtualMachines(id: string) {
     const host = await this.get(id);
     return this.virtualMachineRepository.list({ hostId: host.id });
+  }
+
+  async save(host: Host) {
+    return this.repository.save(host);
   }
 
   async create(dto: HostDTO) {
