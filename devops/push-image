@@ -1,0 +1,3 @@
+VERSION=0.0.5
+docker tag datacenter-inventory:$VERSION leonpereiratech/datacenter-inventory:$VERSION
+docker push leonpereiratech/datacenter-inventory:$VERSION

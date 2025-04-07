@@ -1,0 +1,4 @@
+VERSION=0.0.5
+cd ..
+yarn build;
+docker build -t datacenter-inventory:$VERSION .;
