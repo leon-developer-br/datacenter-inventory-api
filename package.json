@@ -1,6 +1,10 @@
 {
   "name": "datacenter-inventory-api",
+<<<<<<< HEAD
   "version": "0.0.5",
+=======
+  "version": "0.0.4",
+>>>>>>> 1329672bd250504eba09164dc260bb60b9336450
   "description": "Datacenter inventory REST API",
   "author": "leonpereiratech@gmail.com",
   "private": true,
