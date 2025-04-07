@@ -1,49 +1,61 @@
 [
     {
+      "id": "domain-c175144",
       "cluster": "Lavradio",
       "hosts": ["10.1.30.150", "10.1.30.151", "10.1.30.157", "10.1.30.158", "10.1.30.159"]
     },
     {
+      "id": "domain-c319047",
       "cluster": "Oracle-LV",
       "hosts": ["10.1.30.154", "10.1.30.156"]
     },
     {
+      "id": "domain-c12801",
       "cluster": "Cluster-hml",
       "hosts": ["hvma0719.trtrio.gov.br", "hvmc0725.trtrio.gov.br", "hvmc0913.trtrio.gov.br"]
     },
     {
+      "id": "domain-c302169",
       "cluster": "Cluster-Oracle-Features",
       "hosts": ["hvma0710.trtrio.gov.br", "hvme0303.trtrio.gov.br", "hvme0304.trtrio.gov.br"]
     },
     {
+      "id": "domain-c35240",
       "cluster": "Cluster-Oracle-NO-Features",
       "hosts": ["hvma0708.trtrio.gov.br", "hvma0709.trtrio.gov.br", "hvmc0728.trtrio.gov.br", "hvmd0728.trtrio.gov.br", "hvme0305.trtrio.gov.br"]
     },
     {
+      "id": "domain-c54418",
       "cluster": "Cluster-PJe-App",
       "hosts": ["hvma0718.trtrio.gov.br", "hvmc0730.trtrio.gov.br", "hvme0311.trtrio.gov.br", "hvme0312.trtrio.gov.br", "hvme0313.trtrio.gov.br"]
     },
     {
+      "id": "domain-c54853",
       "cluster": "Cluster-PJe-DB-Ambientes",
-      "hosts": ["hvmc0932.trtrio.gov.br, hvmc0936.trtrio.gov.br", "hvmd0722.trtrio.gov.br", "hvme0330.trtrio.gov.br"]
+      "hosts": ["hvmc0932.trtrio.gov.br", "hvmc0936.trtrio.gov.br", "hvmd0722.trtrio.gov.br", "hvme0330.trtrio.gov.br"]
     },
     {
+      "id": "domain-c54420",
       "cluster": "Cluster-PJe-DB-Prod",
       "hosts": ["hvmc0924.trtrio.gov.br", "hvmc0933.trtrio.gov.br", "hvmc0937.trtrio.gov.br", "hvmd0720.trtrio.gov.br", "hvmd0724.trtrio.gov.br", "hvmd0732.trtrio.gov.br", "hvme0328.trtrio.gov.br"]
     },
     {
+      "id": "",
       "cluster": "Cluster-Prod",
       "hosts": ["hvma0717.trtrio.gov.br", "hvmc0715.trtrio.gov.br", "hvmc0734.trtrio.gov.br", "hvmc0736.trtrio.gov.br", "hvmc0925.trtrio.gov.br", "hvme0314.trtrio.gov.br", "hvme0315.trtrio.gov.br" ]
     },
     {
+      "id": "domain-c3204",
       "cluster": "Cluster-SGBD",
       "hosts": ["hvmc0923.trtrio.gov.br", "hvmd0323.trtrio.gov.br", "hvme0326.trtrio.gov.br"]
     },
     {
+      "id": "domain-c464907",
       "cluster": "Teste",
       "hosts": ["hvmc0926.trtrio.gov.br", "hvmc0930.trtrio.gov.br", "hvmc0931.trtrio.gov.br", "hvmd0726.trtrio.gov.br"]
     },
     {
+      "id": "domain-c289435",
       "cluster": "WIFI-Aruba",
       "hosts": ["hvmc0929.trtrio.gov.br", "hvmd0325.trtrio.gov.br"]
     }

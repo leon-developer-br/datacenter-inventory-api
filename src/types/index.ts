@@ -10,10 +10,10 @@ export type QueryHost = {
 export type HostDTO = {
   id: string;
   name: string;
-  vendor: string;
+  vendor?: string;
   clusterId: string;
-  cpu: number;
-  memory: number;
+  cpu?: number;
+  memory?: number;
 };
 
 export type VirtualMachineDTO = {

@@ -4,8 +4,14 @@ import { HostService } from './host.service';
 import { readFileSync } from 'fs';
 
 type ClustersAndHosts = {
+  id: string;
   cluster: string;
   hosts: string[];
+};
+
+type Host = {
+  host: string;
+  name: string;
 };
 
 @Injectable()
@@ -17,28 +23,41 @@ export class BootstrapService implements OnModuleInit {
 
   onModuleInit() {
     this.linkClustersAndHosts();
-    this.setHostIps();
+    //this.setHostIps();
   }
 
   async linkClustersAndHosts() {
+    return
     const raw = readFileSync('clusters-hosts.json', { encoding: 'utf-8' });
-    console.log(raw);
     const lines: ClustersAndHosts[] = JSON.parse(raw);
+
+    const rawHosts = readFileSync('hosts.json', { encoding: 'utf-8' });
+    const lineHosts: Host[] = JSON.parse(rawHosts);
+
     for (const line of lines) {
       const cluster = await this.clusterService.findByName(line.cluster);
       if (!cluster) {
-        console.error(`Cluster [${line.cluster}] nao encontrado`);
-        continue;
+        await this.clusterService.create({
+          id: line.id,
+          name: line.cluster
+        })
+        console.error(`Cluster [${line.cluster}] criado`);
       }
       console.log(`>>>>>> Cluster com ${line.hosts.length} hosts`);
       for (const lineHost of line.hosts) {
         const host = await this.hostService.findByName(lineHost);
         if (!host) {
-          console.error(`Host [${lineHost}] nao encontrado`);
-          continue;
+          const id = lineHosts.find(l => l.name === lineHost)?.host;
+          if(!id) {
+            throw new Error(`Não foi encontrado id para o host ${lineHost} no cluster ${cluster.name}`)
+          }
+          await this.hostService.create({
+            id: String(id),
+            name: lineHost,
+            clusterId: cluster.id
+          })
+          console.error(`Host [${lineHost}] criado`);
         }
-        host.cluster = cluster;
-        await this.hostService.save(host);
       }
       console.log(`>>>>>> Cluster finalizado: ${line.cluster}`);
     }
